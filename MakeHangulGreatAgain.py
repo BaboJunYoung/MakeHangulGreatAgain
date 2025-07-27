@@ -4,19 +4,18 @@ def main(sentenceList: list):
     sentence = " ".join(sentenceList)
     result = ""
 
-    firstSound = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
-    middleSound = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"]
-    lastSound = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
+    jungsungLength = 21
+    jongsungLength = 28
 
     for char in sentence:
         if ord("가") <= ord(char) <= ord("힣"):
             # char는 한글
             pureHangul = ord(char) - ord("가")
             
-            chosungIndex = pureHangul // (len(middleSound) * len(lastSound))
-            jungsungIndex = (pureHangul % (len(middleSound) * len(lastSound)) // len(lastSound))
+            chosungIndex = pureHangul // (jungsungLength * jongsungLength)
+            jungsungIndex = (pureHangul % (jungsungLength * jongsungLength) // jongsungLength)
 
-            changedHangul = (chosungIndex * len(middleSound) * len(lastSound)) + (jungsungIndex * len(lastSound)) + 18 + ord("가")
+            changedHangul = (chosungIndex * jungsungLength * jongsungLength) + (jungsungIndex * jongsungLength) + 18 + ord("가")
             
             result += chr(changedHangul)
         else: result += char
